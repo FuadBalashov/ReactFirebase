@@ -1,5 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
+import Input from './Input.jsx';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDzTLJhoMxTNBADq2AOB83rclB2KIrRcEU",
@@ -83,22 +84,9 @@ class App extends React.Component {
         <div>
           {messageDivs}
         </div>
-        <label htmlFor="message">Message</label>
-        <input
-          id="message"
-          type="text"
-          value={this.state.newMessage}
-          onChange={this.handleMessageChange}
-          onKeyPress={this.handleKeyPress}
-        />
+        <Input label={"Message"} value={this.state.newMessage} onChange={this.handleMessageChange} onKeyPress={this.handleKeyPress} />
         <br/>
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          value={this.state.name}
-          onChange={this.handleNameChange}
-        />
+        <Input label={"Name"} value={this.state.name} onChange={this.handleNameChange} />
         <br/>
         <button onClick={this.clearChat}>Clear Chat History</button>
       </div>
