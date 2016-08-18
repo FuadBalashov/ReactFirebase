@@ -1,4 +1,5 @@
 import React from 'react';
+import Message from './Message.jsx';
 import * as firebase from 'firebase';
 
 const firebaseConfig = {
@@ -74,7 +75,7 @@ class App extends React.Component {
 
   render() {
     const messageDivs = this.state.messages.map((message) => {
-      return <p key={message._key}>{message.name}: {message.message}</p>;
+      return <Message message={message}/>;
     });
 
     return (
