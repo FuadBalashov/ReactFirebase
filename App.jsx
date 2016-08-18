@@ -9,40 +9,34 @@ const firebaseConfig = {
 };
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      // the page is the screen we want to show the user, we will determine that
-      // based on what user the firebase api returns to us.
+const App = React.createClass({
+  getInitialState() {
+    return {
       name: "Bob",
       newMessage: "",
       messages: []
     };
+  },
 
+  componentWillMount() {
     this.messagesRef = firebaseApp.database().ref('messages');
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
-    this.listenForItems = this.listenForItems.bind(this);
-    this.clearChat = this.clearChat.bind(this);
-  }
+  },
 
   componentDidMount() {
     this.listenForItems(this.messagesRef);
-  }
+  },
 
   handleNameChange(event) {
     this.setState({name: event.target.value});
-  }
+  },
 
   handleMessageChange(event) {
     this.setState({newMessage: event.target.value});
-  }
+  },
 
   clearChat(event) {
     this.messagesRef.remove();
-  }
+  },
 
   listenForItems(messagesRef) {
     messagesRef.on('value', (snap) => {
@@ -60,7 +54,7 @@ class App extends React.Component {
         messages: newMessages
       });
     });
-  }
+  },
 
   handleKeyPress(event) {
     if (!this.state.name || !this.state.newMessage) {
@@ -70,7 +64,7 @@ class App extends React.Component {
       this.messagesRef.push({ name: this.state.name, message: this.state.newMessage });
       this.setState({newMessage: ""});
     }
-  }
+  },
 
   render() {
     const messageDivs = this.state.messages.map((message) => {
@@ -104,6 +98,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
+});
 
 export default App;
