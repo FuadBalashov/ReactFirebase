@@ -12,6 +12,9 @@ var config = {
    },
 
    module: {
+     preLoaders: [
+        { test: /\.json$/, loader: 'json'}
+    ],
       loaders: [
          {
             test: /\.jsx?$/,
