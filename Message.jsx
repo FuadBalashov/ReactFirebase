@@ -1,8 +1,10 @@
 import React from 'react';
+import * as emoji from 'node-emoji';
 
 const Message = React.createClass({
   render() {
-    return <p key={this.props.message._key}>{this.props.message.name}: {this.props.message.message}</p>;
+    const emojifiedString = emoji.emojify(this.props.message.message);
+    return <p key={this.props.message._key}>{this.props.message.name}: {emojifiedString}</p>;
   }
 });
 
